@@ -415,6 +415,15 @@ function App(){
 
   const variant = VARIANT_MAP[t.cardVariant] || "classic";
 
+  // hash navigation para Maze UX tracking
+  useAE(()=>{
+    let hash;
+    if (!authed)    hash = 'auth';
+    else if (!role) hash = 'role';
+    else            hash = `${role}-${view}`;
+    window.location.hash = hash;
+  }, [authed, role, view]);
+
   // aplicar tweaks de tema
   useAE(()=>{
     const root = document.documentElement;
